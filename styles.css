@@ -1,6 +1,6 @@
 body {
     font-family: "Georgia", serif;
-    background-color: #98FF98; /* Mint green background */
+    background-color: #4ab9af; /* Mint green background */
     color: #333;
     text-align: center;
     margin: 0;
@@ -38,7 +38,7 @@ h1 {
 .email-button {
     display: inline-block;
     background: #fff;
-    color: #f4f4f4; /* Accent color matching mint green */
+    color: #4fb9af; /* Accent color matching mint green */
     padding: 10px 20px;
     font-size: 1.2em;
     text-decoration: none;
