@@ -1,30 +1,602 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test 2 Everyday Insights AI, LLC</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Everyday Insights AI, LLC</title>
+  <style>
+    :root {
+      --warm-cream: #fbf6ec;
+      --soft-cream: #f6efe3;
+      --mist: #eef1e8;
+      --forest: #0f3a2e;
+      --deep-green: #173f35;
+      --slate: #29333a;
+      --charcoal: #1f2529;
+      --brass: #a67c45;
+      --white-glass: rgba(255, 255, 255, 0.58);
+      --border-soft: rgba(41, 51, 58, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, var(--warm-cream) 0%, var(--mist) 100%);
+      color: var(--charcoal);
+      font-family: Inter, Avenir, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      background: rgba(23, 63, 53, 0.08);
+      top: 120px;
+      right: -120px;
+      z-index: 0;
+    }
+
+    .page::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 999px;
+      background: rgba(166, 124, 69, 0.10);
+      bottom: 80px;
+      left: -120px;
+      z-index: 0;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      padding: 26px 0;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 18px;
+      border: 1px solid var(--border-soft);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.46);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 45px rgba(31, 37, 41, 0.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(15, 58, 46, 0.18);
+      background: var(--warm-cream);
+    }
+
+    .brand-name {
+      color: var(--forest);
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--slate);
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+    }
+
+    .nav-cta {
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: var(--slate);
+      color: var(--warm-cream);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: center;
+      padding: 70px 0 84px;
+    }
+
+    .hero-image {
+      position: relative;
+      min-height: 560px;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 24px 60px rgba(31, 37, 41, 0.14);
+      background: #e9e3d8;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15,58,46,0.35), rgba(15,58,46,0.02));
+    }
+
+    .eyebrow {
+      color: var(--forest);
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 0.76rem;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-family: Didot, "Bodoni 72", Georgia, "Times New Roman", serif;
+      color: var(--forest);
+      font-size: clamp(3.4rem, 8vw, 7.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.055em;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      color: #3a464b;
+      max-width: 640px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      border: 0;
+      background: var(--slate);
+      color: var(--warm-cream);
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      box-shadow: 0 14px 28px rgba(31, 37, 41, 0.18);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--forest);
+      border: 1px solid rgba(15, 58, 46, 0.28);
+      box-shadow: none;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 30px;
+      border-radius: 32px;
+      background: var(--white-glass);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 24px 60px rgba(31, 37, 41, 0.13);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 999px;
+      background: rgba(23, 63, 53, 0.08);
+      top: -40px;
+      right: -40px;
+      z-index: -1;
+    }
+
+    .card-label {
+      color: var(--slate);
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-card h2 {
+      font-family: Didot, "Bodoni 72", Georgia, serif;
+      color: var(--forest);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      font-weight: 500;
+      margin-bottom: 18px;
+    }
+
+    .hero-card p {
+      color: #3a464b;
+      margin-bottom: 22px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      display: grid;
+      grid-template-columns: 9px 1fr;
+      gap: 12px;
+      align-items: start;
+      color: #2e383d;
+      font-size: 0.96rem;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--brass);
+      margin-top: 8px;
+    }
+
+    section {
+      padding: 68px 0;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+
+    .section-header h2 {
+      font-family: Didot, "Bodoni 72", Georgia, serif;
+      color: var(--forest);
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: #3a464b;
+      font-size: 1.05rem;
+    }
+
+    .mission-card {
+      padding: 34px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.52);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 24px 60px rgba(31, 37, 41, 0.10);
+    }
+
+    .mission-card p {
+      color: #324046;
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
+      margin-bottom: 18px;
+    }
+
+    .mission-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      padding: 26px;
+      min-height: 230px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.50);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 45px rgba(31, 37, 41, 0.08);
+    }
+
+    .service-card .number {
+      color: var(--brass);
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      color: var(--forest);
+      font-size: 1.15rem;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .service-card p {
+      color: #3a464b;
+      margin-bottom: 0;
+      font-size: 0.96rem;
+    }
+
+    .contact-section {
+      padding-bottom: 90px;
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 34px;
+      border-radius: 34px;
+      background: var(--forest);
+      color: var(--warm-cream);
+      box-shadow: 0 24px 60px rgba(31, 37, 41, 0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      right: -80px;
+      top: -80px;
+    }
+
+    .contact-card h2 {
+      font-family: Didot, "Bodoni 72", Georgia, serif;
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .contact-card p {
+      color: #edf1ea;
+      margin-bottom: 0;
+      max-width: 620px;
+    }
+
+    .contact-card .button {
+      background: var(--warm-cream);
+      color: var(--forest);
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    footer {
+      padding: 26px 0 40px;
+      color: var(--slate);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    @media (max-width: 850px) {
+      .nav-bar {
+        align-items: flex-start;
+        border-radius: 28px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 44px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .brand-name {
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .hero-card,
+      .mission-card,
+      .contact-card {
+        padding: 24px;
+        border-radius: 26px;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="logo.jpg" alt="Everyday Insights AI Logo" class="logo">
-        <h1>Everyday Insights AI, LLC</h1>
+  <div class="page">
+    <header class="container">
+      <div class="nav-bar">
+        <a class="brand" href="#top" aria-label="Everyday Insights AI home">
+          <!-- Replace logo.JPEG with your actual logo file name/path if needed. -->
+          <img src="a_clean_minimal_indoor_still_life_shot_in_soft_n.png" alt="Everyday Insights AI Brand Image" />
+          <div class="brand-name">Everyday Insights AI</div>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#mission">Mission</a>
+          <a href="#services">Services</a>
+          <a class="nav-cta" href="mailto:everydayinsightsai@gmail.com">Contact</a>
+        </nav>
+      </div>
     </header>
 
-    <main>
-        <section class="mission">
-            <h2>Our Mission</h2>
-            <p>
-At Everyday Insights AI, we empower Micro and Niche Enterprises—such as salons, specialty boutiques, independent consultants, artisanal service providers, local retailers, and agritourism businesses—to harness the power of AI without the tech overwhelm. We simplify AI adoption, making it accessible and practical for business owners who want to enhance efficiency, improve customer engagement, and stay competitive in a changing market. Our goal is to bridge the gap between innovation and everyday operations, so you can focus on what you do best.
-            </p>
-        </section>
+    <main id="top">
+      <section class="hero container">
+        <div>
+          <div class="eyebrow">AI confidence, without the overwhelm</div>
+          <h1>Everyday Insights AI, LLC</h1>
+          <p class="hero-subtitle">Business-tailored AI support for micro and niche enterprises that want practical tools, clearer workflows, and a calmer path into emerging technology.</p>
+          <div class="hero-actions">
+            <a class="button" href="mailto:everydayinsightsai@gmail.com">Request More Information</a>
+            <a class="button secondary" href="#mission">Read Our Mission</a>
+          </div>
+        </div>
 
-        <section class="contact">
-            <h2>Request More Information</h2>
-            <p>If you'd like to learn more, reach out to us!</p>
-            <a href="mailto:everydayinsightsai@gmail.com" class="email-button">Contact Us</a>
-        </section>
+        <aside class="hero-card" aria-label="Company focus">
+          <div class="card-label">Advisement + Quickstart Guides</div>
+          <h2>Smarter tools. Calmer operations.</h2>
+          <p>We simplify AI adoption so business owners can spend less time sorting through tech noise and more time serving their customers.</p>
+          <ul class="mini-list">
+            <li><span class="dot"></span><span>Approachable AI education for non-technical business owners.</span></li>
+            <li><span class="dot"></span><span>Practical workflow ideas tailored to everyday operations.</span></li>
+            <li><span class="dot"></span><span>Support for customer engagement, efficiency, and competitiveness.</span></li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="mission" class="container">
+        <div class="section-header">
+          <div class="eyebrow">Our Mission</div>
+          <h2>Make AI useful, accessible, and practical.</h2>
+          <p>Everyday Insights AI helps small businesses bridge the gap between innovation and everyday operations.</p>
+        </div>
+
+        <div class="mission-card">
+          <p>At Everyday Insights AI, we empower micro and niche enterprises — such as salons, specialty boutiques, independent consultants, artisanal service providers, local retailers, and agritourism businesses — to harness the power of AI without the tech overwhelm.</p>
+          <p>We simplify AI adoption, making it accessible and practical for business owners who want to enhance efficiency, improve customer engagement, and stay competitive in a changing market.</p>
+          <p>Our goal is to bridge the gap between innovation and everyday operations, so you can focus on what you do best.</p>
+        </div>
+      </section>
+
+      <section id="services" class="container">
+        <div class="section-header">
+          <div class="eyebrow">How We Help</div>
+          <h2>Guidance built for real business owners.</h2>
+          <p>Simple, polished support for teams that need AI to feel usable — not intimidating.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="number">01</div>
+            <h3>AI Readiness</h3>
+            <p>Identify where AI could realistically support your current operations, communication, and customer experience.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="number">02</div>
+            <h3>Quickstart Guides</h3>
+            <p>Receive approachable, business-tailored guidance that helps you begin using AI tools with more confidence.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="number">03</div>
+            <h3>Learning Sessions</h3>
+            <p>Build comfort with AI through clear, beginner-friendly sessions designed for practical everyday use.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section container">
+        <div class="contact-card">
+          <div>
+            <div class="eyebrow">Request More Information</div>
+            <h2>Ready to make AI feel manageable?</h2>
+            <p>If you'd like to learn more, reach out to Everyday Insights AI for a conversation about your business needs.</p>
+          </div>
+          <a class="button" href="mailto:everydayinsightsai@gmail.com">Contact Us</a>
+        </div>
+      </section>
     </main>
+
+    <footer class="container">
+      2025 Everyday Insights AI, LLC
+    </footer>
+  </div>
 </body>
 </html>
